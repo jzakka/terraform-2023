@@ -16,23 +16,24 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-northeast-2"
+  region = var.region
 }
 
-resource "aws_vpc" "example" {
+resource "aws_vpc" "vpc_1" {
   cidr_block = "10.0.0.0/16"
 
   tags = {
-    Name = "example"
+    Name = "${var.region}-vpc-1"
   }
 }
 
-resource "aws_subnet" "example_subnet" {
-  vpc_id = aws_vpc.example.id
+resource "aws_subnet" "subnet_1" {
+  vpc_id = aws_vpc.vpc_1.id
 
   cidr_block = "10.0.0.0/24"
+  availability_zone = "${var.region}a"
 
   tags = {
-    Name = "example-vpc-1"
+    Name = "${var.region}-subnet-1"
   }
 }

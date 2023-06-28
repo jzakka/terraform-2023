@@ -2,7 +2,7 @@ terraform {
   // 이 부분은 terraform cloud에서 설정한 workspace의 이름과 동일해야 함
   // 이 부분은 terraform login 후에 사용가능함
   cloud {
-    organization = "og-1"
+    organization = "og-1-jzakka"
 
     workspaces {
       name = "ws-1"
@@ -88,5 +88,16 @@ resource "aws_security_group" "sg_1" {
 
   tags = {
     Name = "${var.prefix}-sg-1"
+  }
+}
+
+resource "aws_instance" "ec2_1" {
+  ami                    = "ami-04b3f91ebd5bc4f6d"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.subnet_1.id
+  vpc_security_group_ids = [aws_security_group.sg_1.id]
+
+  tags = {
+    Name = "${var.prefix}-ec2-1"
   }
 }

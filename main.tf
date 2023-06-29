@@ -38,7 +38,6 @@ resource "aws_subnet" "subnet_1" {
   availability_zone       = "${var.region}a"
   map_public_ip_on_launch = true
 
-
   tags = {
     Name = "${var.prefix}-subnet-1"
   }

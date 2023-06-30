@@ -182,3 +182,19 @@ resource "aws_s3_bucket_public_access_block" "public_access_block" {
   ignore_public_acls      = false
   restrict_public_buckets = false
 }
+
+resource "aws_route53_zone" "vpc_1_zone" {
+  vpc {
+    vpc_id = aws_vpc.vpc_1.id
+  }
+
+  name = "vpc-1.com"
+}
+
+resource "aws_route53_record" "record_ec2-1_vpc-1_com" {
+  zone_id = aws_route53_zone.vpc_1_zone.zone_id
+  name    = "ec2-1.vpc-1.com"
+  type    = "A"
+  ttl     = "300"
+  records = [aws_instance.ec2_1.private_ip]
+}

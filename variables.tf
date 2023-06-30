@@ -1,9 +1,9 @@
 variable "prefix" {
   description = "Prefix"
-  default = "dev"
+  default     = "dev"
 }
 
 variable "region" {
   description = "region"
-  default = "ap-northeast-2"
+  default     = "ap-northeast-2"
 }
